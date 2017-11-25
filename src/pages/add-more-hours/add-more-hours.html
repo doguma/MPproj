@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      add more hours
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page9">
+
+
+
+  <ion-item>
+      <ion-label>date </ion-label>
+      <ion-input type="date" [(ngModel)]="date">
+
+  </ion-input>
+    </ion-item>
+
+  <ion-item>
+      <ion-label>select time block! </ion-label>
+      <ion-datetime displayFormat="h a" [(ngModel)]="myDate"></ion-datetime>
+  </ion-item>
+
+
+  <ion-item>
+      <ion-input placeholder="insert comment here"></ion-input>
+    </ion-item>
+    <br/>
+    <br/>
+    <br/>
+    
+    <button class="col text-center" ion-button round>Submit</button>
+
+
+</ion-content>
