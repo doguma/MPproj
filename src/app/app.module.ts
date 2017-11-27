@@ -10,7 +10,6 @@ import { PeoplePage } from '../pages/people/people';
 import { AddressPage } from '../pages/address/address';
 import { FriendDetailsPage } from '../pages/friend-details/friend-details';
 import { AddFriendPage } from '../pages/add-friend/add-friend';
-import { AddMoreHoursPage } from '../pages/add-more-hours/add-more-hours';
 import { MyHoursPage } from '../pages/my-hours/my-hours';
 
 import { LoginPage } from '../pages/login/login';
@@ -27,6 +26,27 @@ import { ProfileProvider } from '../providers/profile/profile';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { AngularFireModule } from 'angularfire2';
+import { FirebaseProvider } from './../providers/firebase/firebase';
+
+
+import { AngularFireDatabaseModule, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+
+import { AngularFireAuthModule, AngularFireAuth} from 'angularfire2/auth';
+
+import firebase from 'firebase';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyCM-XS_novOHXT9iBDm7ba82fkTf-n7vbc",
+  authDomain: "eventmanager-fdb05.firebaseapp.com",
+  databaseURL: "https://eventmanager-fdb05.firebaseio.com",
+  projectId: "eventmanager-fdb05",
+  storageBucket: "",
+  messagingSenderId: "589314051524" 
+}
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -38,14 +58,18 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AddressPage,
     FriendDetailsPage,
     AddFriendPage,
-    AddMoreHoursPage,
     MyHoursPage,
     LoginPage,
-    EventCreatePage, EventDetailPage, EventListPage
+    EventCreatePage, 
+    EventDetailPage, 
+    EventListPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -58,7 +82,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AddressPage,
     FriendDetailsPage,
     AddFriendPage,
-    AddMoreHoursPage,
     MyHoursPage,
     LoginPage,
     EventCreatePage, EventDetailPage, EventListPage
@@ -69,7 +92,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     EventProvider,
-    ProfileProvider
+    ProfileProvider,
+    FirebaseProvider
   ]
 })
 export class AppModule {}
