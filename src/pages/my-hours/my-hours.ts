@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
-import { NavController, ItemSliding, NavParams } from 'ionic-angular';
+import { NavController, AlertController, ItemSliding, NavParams } from 'ionic-angular';
 
 import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 
-import { FirebaseProvider } from './../../providers/firebase/firebase';
-
 import firebase from 'firebase';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+
+
+
 
 @Component({
   selector: 'page-my-hours',
@@ -13,29 +16,32 @@ import firebase from 'firebase';
 })
 export class MyHoursPage {
   
-    username: string = '';
     message: string = '';
     s;
     messages: object[] = [];
     dodate: string = '';
     dotime: string = '';
 
-    
 
     constructor(public db: AngularFireDatabase,
-      public navCtrl: NavController, public navParams: NavParams) {
- 
-        var user = firebase.auth().currentUser;
- 
-        this.s = this.db.list('/userProfile/user/hours').subscribe( data => {
+      public navCtrl: NavController, public navParams: NavParams,
+    private alertCtrl: AlertController) {
+
+      const userId:string = firebase.auth().currentUser.uid;
+
+        this.s = this.db.list(`/userProfile/${userId}/hours`).subscribe( data => {
           this.messages = data;
         });
-
-
       }
-  
+
+      // const userId:string = firebase.auth().currentUser.uid; 
+      // firebase.database().ref(`/userProfile/${userId}`).off();
+
+ 
       sendMessage() {
-        this.db.list('/userProfile/user/hours').push({
+        const userId:string = firebase.auth().currentUser.uid;
+
+       this.db.list(`/userProfile/${userId}/hours`).push({
           message: this.message,
           dodate: this.dodate,
           dotime: this.dotime
@@ -44,11 +50,9 @@ export class MyHoursPage {
         }).catch( () => {
           // some error. maybe firebase is unreachable
         });
+
         this.message = '';
         this.dodate = '';
         this.dotime = '';
       }
-
-  
-
 }
