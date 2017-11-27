@@ -9,19 +9,20 @@ import 'rxjs/add/operator/map';
 
 
 
-
 @Component({
   selector: 'page-my-hours',
   templateUrl: 'my-hours.html'
 })
 export class MyHoursPage {
   
-    message: string = '';
-    s;
-    messages: object[] = [];
-    dodate: string = '';
-    dotime: string = '';
+    memo: string = '';
+    date: string = '';
+    stime: string = '';
+    etime: string = '';
 
+    s;
+
+    messages: object[] = [];
 
     constructor(public db: AngularFireDatabase,
       public navCtrl: NavController, public navParams: NavParams,
@@ -33,26 +34,33 @@ export class MyHoursPage {
           this.messages = data;
         });
       }
-
-      // const userId:string = firebase.auth().currentUser.uid; 
-      // firebase.database().ref(`/userProfile/${userId}`).off();
-
  
       sendMessage() {
         const userId:string = firebase.auth().currentUser.uid;
 
        this.db.list(`/userProfile/${userId}/hours`).push({
-          message: this.message,
-          dodate: this.dodate,
-          dotime: this.dotime
+          memo: this.memo,
+          date: this.date,
+          stime: this.stime,
+          etime: this.etime
         }).then( () => {
           // message is sent
         }).catch( () => {
           // some error. maybe firebase is unreachable
         });
 
-        this.message = '';
-        this.dodate = '';
-        this.dotime = '';
+        this.memo = '';
+        this.date = '';
+        this.stime = '';
+        this.etime = '';
       }
-}
+
+
+      removeMessage(slidingItem: ItemSliding, message: any){
+        let index = this.messages.indexOf(message);
+        if (index > -1){
+          this.messages.splice(index,1);
+      }  
+      slidingItem.close();
+    }
+  }

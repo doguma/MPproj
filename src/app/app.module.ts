@@ -27,7 +27,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AngularFireModule } from 'angularfire2';
-import { FirebaseProvider } from './../providers/firebase/firebase';
 
 
 import { AngularFireDatabaseModule, FirebaseListObservable } from 'angularfire2/database';
@@ -92,8 +91,7 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     EventProvider,
-    ProfileProvider,
-    FirebaseProvider
+    ProfileProvider
   ]
 })
 export class AppModule {}

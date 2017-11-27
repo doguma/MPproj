@@ -1,6 +1,3 @@
-
-  
-
 <ion-header>
   <ion-navbar color="light">
     <button ion-button menuToggle>
@@ -12,25 +9,30 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content id="page1">
 
   <ion-card>
-    <ion-item>
+    <!-- <ion-item>
       <ion-label> Your name </ion-label>
       <ion-input type="text" [(ngModel)]="username"></ion-input>
-    </ion-item>
+    </ion-item> -->
     <ion-item>
-      <ion-label> time </ion-label>
-      <ion-input type="time" [(ngModel)]="dotime"></ion-input>
+      <ion-label> start time </ion-label>
+      <ion-datetime displayFormat="HH:mm" type="time" [(ngModel)]="stime" minuteValues="0,30"></ion-datetime>
     </ion-item>
+
+    <ion-item>
+      <ion-label> end time </ion-label>
+      <ion-datetime displayFormat="HH:mm" type="time" [(ngModel)]="etime" minuteValues="0,30"></ion-datetime>
+    </ion-item>
+
     <ion-item>
       <ion-label> date </ion-label>
-      <ion-input type="date" [(ngModel)]="dodate"></ion-input>
+      <ion-datetime type="date" [(ngModel)]="date"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label> memo</ion-label>
-      <ion-input type="text" [(ngModel)]="message"></ion-input>
+      <ion-input type="text" [(ngModel)]="memo"></ion-input>
     </ion-item>
 
     <div padding>
@@ -41,11 +43,19 @@
 
 
   <ion-card *ngFor="let message of messages">
-    <ion-item>
-      <h1>{{ message.dotime }}</h1>
-      <h2>{{ message.dodate }}</h2>
-      <h3>{{ message.message }}</h3>
-    </ion-item>
+    <ion-item-sliding #item>
+      <ion-item>
+        <h1>{{ message.stime }} to {{message.etime}}</h1>
+        <h2>{{ message.date }}</h2>
+        <h3>{{ message.memo }}</h3>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button icon-only (click)="removeMessage(item, message)" expandable color="danger">
+      <ion-icon name="trash">
+        </ion-icon>
+      </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-card>
 
 </ion-content>
