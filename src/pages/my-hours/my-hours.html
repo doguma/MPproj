@@ -11,28 +11,26 @@
 
 <ion-content id="page1">
 
-<div padding>
-  <font color="grey">
-  You may select your personal free time here!
-  <br/>
-  <br/>
-  These hours will be used to make appointments with your friends, family, and acquaintances.
-  <br/>
-  <br/>
-  Keep in mind that the hour indicates the following 60 minutes from the selected time.
-  <br/>
-  Ex.  '9 am' means '9 am to 10 am.'
-</font>
-</div>
+  <div padding>
+    <font color="grey">
+      You may select your personal free time here!
+      <br/>
+      <br/> These hours will be used to make appointments with your friends, family, and acquaintances.
+      <br/>
+      <br/> Keep in mind that the hour indicates the following 60 minutes from the selected time.
+      <br/> Ex. '9 am' means '9 am to 10 am.'
+    </font>
+  </div>
 
   <ion-card>
 
-
+    <ion-item>
+      <ion-label> date </ion-label>
+      <ion-datetime type="date" max="2025"[(ngModel)]="date"></ion-datetime>
+    </ion-item>
 
     <ion-item>
-      <ion-label>hour
-
-      </ion-label>
+      <ion-label>hour</ion-label>
       <ion-select [(ngModel)]="freetime" multiple="true">
         <ion-option> 6 am</ion-option>
         <ion-option> 7 am</ion-option>
@@ -61,10 +59,6 @@
       </ion-select>
     </ion-item>
 
-    <ion-item>
-      <ion-label> date </ion-label>
-      <ion-datetime type="date" [(ngModel)]="date"></ion-datetime>
-    </ion-item>
     <ion-item>
       <ion-label> memo</ion-label>
       <ion-input type="text" [(ngModel)]="memo"></ion-input>

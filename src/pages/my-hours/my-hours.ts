@@ -29,7 +29,11 @@ export class MyHoursPage {
 
       const userId:string = firebase.auth().currentUser.uid;
 
-        this.s = this.db.list(`/userProfile/${userId}/hours`).subscribe( data => {
+        this.s = this.db.list(`/userProfile/${userId}/hours/`,{
+          query: {
+            orderByChild: 'date'
+          }
+        }).subscribe( data => {
           this.messages = data;
         });
       }
@@ -47,17 +51,31 @@ export class MyHoursPage {
           // some error. maybe firebase is unreachable
         });
 
+
+      // firebase.database().ref(`/userProfile/${userId}/hours`)
+      // .set(this.date)
+      // .catch( error => console.error(error) );
+
+      // firebase.database().ref(`/userProfile/${userId}/hours/date`)
+      // .set(this.freetime)
+      // .catch( error => console.error(error) );
+
+      // firebase.database().ref(`/userProfile/${userId}/hours/date`)
+      // .set(this.memo)
+      // .catch( error => console.error(error) );
+
+
         this.memo = '';
         this.date = '';
         this.freetime = '';
       }
 
 
-      removeMessage(slidingItem: ItemSliding, messages: any){
-        let index = this.messages.indexOf(messages);
-        if (index > -1){
-          this.messages.splice(index,1);
-      }  
-      slidingItem.close();
-    }
+    //   removeMessage(slidingItem: ItemSliding, messages: any){
+    //     let index = this.messages.indexOf(messages);
+    //     if (index > -1){
+    //       this.messages.splice(index,1);
+    //   }  
+    //   slidingItem.close();
+    // }
   }

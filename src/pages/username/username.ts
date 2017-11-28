@@ -25,10 +25,8 @@ import 'rxjs/add/operator/map';
 })
 export class UsernamePage {
 
-    s;
-
-    // usernames: object[] = [];
     username: string = '';
+    usernumber: string = '';
 
     constructor(public db: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public alertCtrl: AlertController){
     }
@@ -39,9 +37,14 @@ export class UsernamePage {
     firebase.database().ref(`/userProfile/${userId}/username`)
         .set(this.username)
         .catch( error => console.error(error) );
-        
+   
+    firebase.database().ref(`/userProfile/${userId}/usernumber`)
+    .set(this.usernumber)
+    .catch( error => console.error(error) );    
+
     
         this.username = '';
+        this.usernumber = '';
 
         this.navCtrl.setRoot(LoginPage);
       }
