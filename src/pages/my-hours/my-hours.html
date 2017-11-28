@@ -11,19 +11,57 @@
 
 <ion-content id="page1">
 
+<div padding>
+  <font color="grey">
+  You may select your personal free time here!
+  <br/>
+  <br/>
+  These hours will be used to make appointments with your friends, family, and acquaintances.
+  <br/>
+  <br/>
+  Keep in mind that the hour indicates the following 60 minutes from the selected time.
+  <br/>
+  Ex.  '9 am' means '9 am to 10 am.'
+</font>
+</div>
+
   <ion-card>
     <!-- <ion-item>
       <ion-label> Your name </ion-label>
       <ion-input type="text" [(ngModel)]="username"></ion-input>
     </ion-item> -->
-    <ion-item>
-      <ion-label> start time </ion-label>
-      <ion-datetime displayFormat="HH:mm" type="time" [(ngModel)]="stime" minuteValues="0,30"></ion-datetime>
-    </ion-item>
+
 
     <ion-item>
-      <ion-label> end time </ion-label>
-      <ion-datetime displayFormat="HH:mm" type="time" [(ngModel)]="etime" minuteValues="0,30"></ion-datetime>
+      <ion-label>hour
+
+      </ion-label>
+      <ion-select [(ngModel)]="freetime" multiple="true">
+        <ion-option> 6 am</ion-option>
+        <ion-option> 7 am</ion-option>
+        <ion-option> 8 am</ion-option>
+        <ion-option> 9 am</ion-option>
+        <ion-option> 10 am</ion-option>
+        <ion-option> 11 am</ion-option>
+        <ion-option> 12 pm</ion-option>
+        <ion-option> 1 pm</ion-option>
+        <ion-option> 2 pm</ion-option>
+        <ion-option> 3 pm</ion-option>
+        <ion-option> 4 pm</ion-option>
+        <ion-option> 5 pm</ion-option>
+        <ion-option> 6 pm</ion-option>
+        <ion-option> 7 pm</ion-option>
+        <ion-option> 8 pm</ion-option>
+        <ion-option> 9 pm</ion-option>
+        <ion-option> 10 pm</ion-option>
+        <ion-option> 11 pm</ion-option>
+        <ion-option> 12 am</ion-option>
+        <ion-option> 1 am</ion-option>
+        <ion-option> 2 am</ion-option>
+        <ion-option> 3 am</ion-option>
+        <ion-option> 4 am</ion-option>
+        <ion-option> 5 am</ion-option>
+      </ion-select>
     </ion-item>
 
     <ion-item>
@@ -42,10 +80,10 @@
   </ion-card>
 
 
-  <ion-card *ngFor="let message of messages">
-    <ion-item-sliding #item>
+  <ion-card>
+    <ion-item-sliding *ngFor="let message of messages" #item>
       <ion-item>
-        <h1>{{ message.stime }} to {{message.etime}}</h1>
+        <h1>{{ message.freetime}}</h1>
         <h2>{{ message.date }}</h2>
         <h3>{{ message.memo }}</h3>
       </ion-item>

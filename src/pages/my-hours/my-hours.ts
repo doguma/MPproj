@@ -17,8 +17,7 @@ export class MyHoursPage {
   
     memo: string = '';
     date: string = '';
-    stime: string = '';
-    etime: string = '';
+    freetime: string = '';
 
     s;
 
@@ -41,8 +40,7 @@ export class MyHoursPage {
        this.db.list(`/userProfile/${userId}/hours`).push({
           memo: this.memo,
           date: this.date,
-          stime: this.stime,
-          etime: this.etime
+          freetime: this.freetime
         }).then( () => {
           // message is sent
         }).catch( () => {
@@ -51,13 +49,12 @@ export class MyHoursPage {
 
         this.memo = '';
         this.date = '';
-        this.stime = '';
-        this.etime = '';
+        this.freetime = '';
       }
 
 
-      removeMessage(slidingItem: ItemSliding, message: any){
-        let index = this.messages.indexOf(message);
+      removeMessage(slidingItem: ItemSliding, messages: any){
+        let index = this.messages.indexOf(messages);
         if (index > -1){
           this.messages.splice(index,1);
       }  
