@@ -1,4 +1,5 @@
-import { Component } from '@angular/core'; import {
+import { Component } from '@angular/core'; 
+import {
   IonicPage,
   NavController,
   Loading,
@@ -6,16 +7,20 @@ import { Component } from '@angular/core'; import {
   Alert,
   AlertController
 } from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'; import { AuthProvider } from '../../providers/auth/auth';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
+import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
 import { TabsControllerPage } from '../tabs-controller/tabs-controller';
+import { UsernamePage } from '../username/username';
+import { LoginPage } from '../login/login';
 
 @IonicPage() @Component({
   selector: 'page-signup',
   templateUrl: 'signup.html',
 })
 export class SignupPage {
-    public signupForm: FormGroup;
+
+  public signupForm: FormGroup;
   public loading: Loading;
   constructor(public navCtrl: NavController, public authProvider: AuthProvider, public loadingCtrl: LoadingController, public alertCtrl: AlertController, formBuilder: FormBuilder) {
 
@@ -30,12 +35,12 @@ export class SignupPage {
     if (!this.signupForm.valid) {
       console.log(`Need to complete the form: ${this.signupForm.value}`);
     } else {
-      const email: string = this.signupForm.value.email; 
+      const email: string = this.signupForm.value.email;
       const password: string = this.signupForm.value.password;
 
       this.authProvider.signupUser(email, password).then(user => {
         this.loading.dismiss().then(() => {
-          this.navCtrl.setRoot(TabsControllerPage);
+          this.navCtrl.setRoot(UsernamePage);
         });
       }, error => {
         this.loading.dismiss().then(() => {
@@ -46,7 +51,7 @@ export class SignupPage {
           alert.present();
         });
       });
-      this.loading = this.loadingCtrl.create(); 
+      this.loading = this.loadingCtrl.create();
       this.loading.present();
     }
   }

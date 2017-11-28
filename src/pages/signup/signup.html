@@ -3,11 +3,18 @@
     <ion-title>
       Create an Account </ion-title>
   </ion-navbar>
+
 </ion-header>
 <ion-content padding>
+
+
+
   <form [formGroup]="signupForm" (submit)="signupUser()" novalidate>
-  
+
+
+
     <ion-item>
+
       <ion-label stacked>Email</ion-label>
       <ion-input formControlName="email" type="email" placeholder="Your email address" [class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty">
       </ion-input>
@@ -26,5 +33,7 @@
     </ion-item>
     <button ion-button block type="submit" [disabled]="!signupForm.valid"> Create an Account
   </button> </form>
+
+
 
 </ion-content>

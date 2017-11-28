@@ -61,6 +61,7 @@ export class MyApp {
     if (!params) params = {};
     this.navCtrl.setRoot(MyHoursPage);
   }
+  
 
 
 }

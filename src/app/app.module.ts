@@ -17,7 +17,7 @@ import { LoginPage } from '../pages/login/login';
 import { EventCreatePage } from '../pages/event-create/event-create';
 import { EventDetailPage } from '../pages/event-detail/event-detail';
 import { EventListPage } from '../pages/event-list/event-list';
-
+import { UsernamePage } from '../pages/username/username';
 
 import { AuthProvider } from '../providers/auth/auth';
 import { EventProvider } from '../providers/event/event';
@@ -61,7 +61,8 @@ export const firebaseConfig = {
     LoginPage,
     EventCreatePage, 
     EventDetailPage, 
-    EventListPage
+    EventListPage,
+    UsernamePage
   ],
   imports: [
     BrowserModule,
@@ -83,7 +84,8 @@ export const firebaseConfig = {
     AddFriendPage,
     MyHoursPage,
     LoginPage,
-    EventCreatePage, EventDetailPage, EventListPage
+    EventCreatePage, EventDetailPage, EventListPage,
+    UsernamePage
   ],
   providers: [
     StatusBar,
