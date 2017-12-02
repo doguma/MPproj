@@ -9,15 +9,30 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page5">
-  <button id="matching-button5" ion-button color="dark" block on-click="goToPeople()">
-    사람 추가
+
+
+    <ion-select [ngModel]="selectedFriend" name="myFriend">
+        <ion-option *ngFor="let myFriend of myFriends" [value]="myFriend.name">
+            {{myFriend.name}}
+        </ion-option>
+    </ion-select>
+
+
+
+  <button id="matching-button8" ion-button color="standard" block (click)="sendFriend()">
+    Yes, I want this person
   </button>
-  <div id="matching-container1"></div>
-  <div class="spacer" style="height:100px;" id="matching-spacer1"></div>
-  <button id="matching-button7" ion-button color="stable" block style="font-weight:500;">
-    뒤로가기
-  </button>
-  <button id="matching-button8" ion-button color="positive" block>
-    초대하기
-  </button>
+
+
+  <ion-card>
+      <ion-item-sliding *ngFor="let message of messages" #item>
+        <ion-item>
+          <h1>{{ message.freetime}}</h1>
+          <h2>{{ message.date }}</h2>
+          <h3>{{ message.memo }}</h3>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-card>
+
+
 </ion-content>

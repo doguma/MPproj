@@ -8,23 +8,24 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page7">
-  <button id="address-button13" ion-button color="positive" block on-click="goToAddFriend()">
+
+<ion-content>
+  <button ion-button color="positive" block on-click="goToAddFriend()">
     <ion-icon name="add"></ion-icon>
   </button>
-  <form id="address-form3">
-    <ion-searchbar placeholder="" name="" id="address-search2"></ion-searchbar>
-    <ion-item color="none" id="address-list-item1">
-      Item
-    </ion-item>
-    <ion-item color="none" id="address-list-item2">
-      Item
-    </ion-item>
-    <ion-item color="none" id="address-list-item3">
-      Item
-    </ion-item>
-    <ion-item color="none" id="address-list-item4">
-      Item
-    </ion-item>
-  </form>
-</ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let friend of friends | async" #slidingItem>
+      <ion-item>
+        <h1>{{friend.name}}</h1>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button icon-only (click)="editFriend(slidingItem,friend)">
+          <ion-icon name="create"></ion-icon>
+        </button>
+        <button ion-button icon-only expandable color="danger" (click)="removeFriend(slidingItem, friend)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </ion-content>

@@ -51,20 +51,6 @@ export class MyHoursPage {
           // some error. maybe firebase is unreachable
         });
 
-
-      // firebase.database().ref(`/userProfile/${userId}/hours`)
-      // .set(this.date)
-      // .catch( error => console.error(error) );
-
-      // firebase.database().ref(`/userProfile/${userId}/hours/date`)
-      // .set(this.freetime)
-      // .catch( error => console.error(error) );
-
-      // firebase.database().ref(`/userProfile/${userId}/hours/date`)
-      // .set(this.memo)
-      // .catch( error => console.error(error) );
-
-
         this.memo = '';
         this.date = '';
         this.freetime = '';
