@@ -6,7 +6,6 @@ import { NewNotificationsPagePage } from '../pages/new-notifications-page/new-no
 import { CurrentAppointmentsPagePage } from '../pages/current-appointments-page/current-appointments-page';
 import { TabsControllerPage } from '../pages/tabs-controller/tabs-controller';
 import { MatchingPage } from '../pages/matching/matching';
-import { PeoplePage } from '../pages/people/people';
 import { AddressPage } from '../pages/address/address';
 import { FriendDetailsPage } from '../pages/friend-details/friend-details';
 import { AddFriendPage } from '../pages/add-friend/add-friend';
@@ -53,7 +52,6 @@ export const firebaseConfig = {
     CurrentAppointmentsPagePage,
     TabsControllerPage,
     MatchingPage,
-    PeoplePage,
     AddressPage,
     FriendDetailsPage,
     AddFriendPage,
@@ -78,7 +76,6 @@ export const firebaseConfig = {
     CurrentAppointmentsPagePage,
     TabsControllerPage,
     MatchingPage,
-    PeoplePage,
     AddressPage,
     FriendDetailsPage,
     AddFriendPage,

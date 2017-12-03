@@ -1,77 +1,62 @@
-import { Component } from '@angular/core';
-import { NavController, AlertController, ItemSliding, NavParams } from 'ionic-angular';
 
-import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
+import { Component } from '@angular/core';
+
+import { NavController } from 'ionic-angular';
 
 import firebase from 'firebase';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
-
-import { PeoplePage } from '../../pages/people/people'; 
 
 @Component({
   selector: 'page-matching',
   templateUrl: 'matching.html'
 })
 export class MatchingPage {
+  public countryList:Array<any>;
+  public loadedCountryList:Array<any>;
+  public countryRef:firebase.database.Reference;
 
-  s;
-  name: string = '';
-  number: string = '';
-  messages : object[] = [];
-  myFriends: object[] = [];
+  constructor(public navCtrl: NavController) {
+    this.countryRef = firebase.database().ref('/randomHours');
 
-  memo: string = '';
-  date: string = '';
-  freetime: string = '';
+    this.countryRef.on('value', countryList => {
+      let countries = [];
+      countryList.forEach( country => {
+        countries.push(country.val());
+        return false;
+      });
 
-  constructor(public db: AngularFireDatabase,
-    public navCtrl: NavController, public navParams: NavParams,
-  private alertCtrl: AlertController) {
-
-    const userId:string = firebase.auth().currentUser.uid;
-
-    this.s = this.db.list(`/userProfile/${userId}/friends/`,{
-      query: {
-        orderByChild: 'name'
-      }
-    }).subscribe( data => {
-      this.myFriends = data;
+      this.countryList = countries;
+      this.loadedCountryList = countries;
     });
-
   }
 
+  initializeItems(){
+    this.countryList = this.loadedCountryList;
+  }
+
+  getItems(searchbar) {
+    // Reset items back to all of the items
+    this.initializeItems();
+    
+    // set q to the value of the searchbar
+    var q = searchbar.srcElement.value;
 
 
-  sendFriend() {
-    this.db.list(`/userProfile/username`,{
-      query: {
-        orderByChild: 'date',
-        equalTo: `${this.name}`
+    // if the value is an empty string don't filter the items
+    if (!q) {
+      return;
+    }
+
+    this.countryList = this.countryList.filter((v) => {
+      if(v.nickname && q) {
+        if (v.nickname.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
       }
-    }).push({
-      memo: this.memo,
-      date: this.date,
-      freetime: this.freetime
-    }).then( data => {
-      this.messages = data;
-    }).catch( () => {
-      // some error. maybe firebase is unreachable
     });
 
-    this.memo = '';
-    this.date = '';
-    this.freetime = '';
-  }
-  
+    console.log(q, this.countryList.length);
 
-
-  goToPeople(params){
-    if (!params) params = {};
-    this.navCtrl.push(PeoplePage);
-  }goToMatching(params){
-    if (!params) params = {};
-    this.navCtrl.push(MatchingPage);
   }
 
 }

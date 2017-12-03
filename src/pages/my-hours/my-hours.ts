@@ -18,8 +18,9 @@ export class MyHoursPage {
     memo: string = '';
     date: string = '';
     freetime: string = '';
-
+    nickname: string = '';
     s;
+    t;
 
     messages: object[] = [];
 
@@ -29,23 +30,40 @@ export class MyHoursPage {
 
       const userId:string = firebase.auth().currentUser.uid;
 
-        this.s = this.db.list(`/userProfile/${userId}/hours/`,{
+        this.s = this.db.list(`/userProfile/${userId}/hours`,{
           query: {
             orderByChild: 'date'
           }
         }).subscribe( data => {
           this.messages = data;
         });
+
+
+        
       }
  
       sendMessage() {
         const userId:string = firebase.auth().currentUser.uid;
 
-       this.db.list(`/userProfile/${userId}/hours`).push({
+       this.db.list(`/randomHours`).push({
           memo: this.memo,
           date: this.date,
-          freetime: this.freetime
+          freetime: this.freetime,
+          nickname: this.nickname
         }).then( () => {
+
+          // message is sent
+        }).catch( () => {
+          // some error. maybe firebase is unreachable
+        });
+        
+        this.db.list(`/userProfile/${userId}/hours`).push({
+          memo: this.memo,
+          date: this.date,
+          freetime: this.freetime,
+          nickname: this.nickname
+        }).then( () => {
+
           // message is sent
         }).catch( () => {
           // some error. maybe firebase is unreachable
@@ -54,6 +72,7 @@ export class MyHoursPage {
         this.memo = '';
         this.date = '';
         this.freetime = '';
+        this.nickname = '';
       }
 
 

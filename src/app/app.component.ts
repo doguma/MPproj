@@ -9,7 +9,7 @@ import { TabsControllerPage } from '../pages/tabs-controller/tabs-controller';
 import { AddressPage } from '../pages/address/address';
 import { MyHoursPage } from '../pages/my-hours/my-hours';
 import { LoginPage } from '../pages/login/login';
-
+import { MatchingPage } from '../pages/matching/matching';
 
 @Component({
   templateUrl: 'app.html'

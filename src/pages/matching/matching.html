@@ -8,31 +8,21 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
+
 <ion-content padding id="page5">
 
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-list>
 
-    <ion-select [ngModel]="selectedFriend" name="myFriend">
-        <ion-option *ngFor="let myFriend of myFriends" [value]="myFriend.name">
-            {{myFriend.name}}
-        </ion-option>
-    </ion-select>
+    <ion-item-sliding *ngFor="let country of countryList">
+      <ion-item>
+        <h1> {{ country.freetime }}</h1>
+        <h2>{{ country.date }}</h2>
+        <h3>{{ country.memo }}</h3>
+        <h4 style="color:blue;">{{ country.nickname }}</h4>
+      </ion-item>
+    </ion-item-sliding>
 
-
-
-  <button id="matching-button8" ion-button color="standard" block (click)="sendFriend()">
-    Yes, I want this person
-  </button>
-
-
-  <ion-card>
-      <ion-item-sliding *ngFor="let message of messages" #item>
-        <ion-item>
-          <h1>{{ message.freetime}}</h1>
-          <h2>{{ message.date }}</h2>
-          <h3>{{ message.memo }}</h3>
-        </ion-item>
-      </ion-item-sliding>
-    </ion-card>
-
+  </ion-list>
 
 </ion-content>
