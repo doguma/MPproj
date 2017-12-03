@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController, ItemSliding, NavParams } from 'ionic-angular';
 
+import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 import { MatchingPage } from '../../pages/matching/matching';
+
+import firebase from 'firebase';
 
 @Component({
   selector: 'page-current-appointments-page',
@@ -9,10 +12,36 @@ import { MatchingPage } from '../../pages/matching/matching';
 })
 export class CurrentAppointmentsPagePage {
 
-  constructor(public navCtrl: NavController) {
-  }
-  goToMatching(params){
-    if (!params) params = {};
-    this.navCtrl.push(MatchingPage);
-  }
+  memo: string = '';
+  date: string = '';
+  freetime: string = '';
+  nickname: string = '';
+  nickname2: string = '';
+  s;
+  t;
+
+  messages: object[] = [];
+
+  constructor(public db: AngularFireDatabase,
+    public navCtrl: NavController, public navParams: NavParams,
+  private alertCtrl: AlertController) {
+
+    const userId:string = firebase.auth().currentUser.uid;
+
+      this.s = this.db.list(`/userProfile/${userId}/meetings`,{
+        query: {
+          orderByChild: 'date'
+        }
+      }).subscribe( data => {
+        this.messages = data;
+      });
+
+
+      
+    }
+    goToMatching(params){
+      if (!params) params = {};
+      this.navCtrl.push(MatchingPage);
+    }
+   
 }

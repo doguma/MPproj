@@ -2,8 +2,11 @@
 import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
+import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 
 import firebase from 'firebase';
+
+import { CurrentAppointmentsPagePage} from '../../pages/current-appointments-page/current-appointments-page'
 
 @Component({
   selector: 'page-matching',
@@ -14,7 +17,14 @@ export class MatchingPage {
   public loadedCountryList:Array<any>;
   public countryRef:firebase.database.Reference;
 
-  constructor(public navCtrl: NavController) {
+  memo: string = '';
+  date: string = '';
+  freetime: string = '';
+  nickname: string = '';
+  nickname2: string = '';
+
+
+  constructor(public db: AngularFireDatabase, public navCtrl: NavController) {
     this.countryRef = firebase.database().ref('/randomHours');
 
     this.countryRef.on('value', countryList => {
@@ -28,6 +38,46 @@ export class MatchingPage {
       this.loadedCountryList = countries;
     });
   }
+
+  setMeeting() {
+    const userId:string = firebase.auth().currentUser.uid;
+
+   this.db.list(`/randomMeetings`).push({
+      memo: this.memo,
+      date: this.date,
+      freetime: this.freetime,
+      nickname: this.nickname,
+      nickname2: this.nickname2
+    }).then( () => {
+
+      // message is sent
+    }).catch( () => {
+      // some error. maybe firebase is unreachable
+    });
+    
+    this.db.list(`/userProfile/${userId}/meetings`).push({
+      memo: this.memo,
+      date: this.date,
+      freetime: this.freetime,
+      nickname: this.nickname,
+      nickname2: this.nickname2
+    }).then( () => {
+
+      // message is sent
+    }).catch( () => {
+      // some error. maybe firebase is unreachable
+    });
+
+    this.memo = '';
+    this.date = '';
+    this.freetime = '';
+    this.nickname = '';
+    this.nickname2 = '';
+
+
+    this.navCtrl.push(CurrentAppointmentsPagePage); 
+  }
+
 
   initializeItems(){
     this.countryList = this.loadedCountryList;

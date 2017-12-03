@@ -1,16 +1,32 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      Current Appointments Page
-    </ion-title>
-    <ion-buttons end>
-        <button ion-button icon-only block on-click="goToMatching()">
-        <ion-icon name="add"></ion-icon>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
       </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
-<ion-content padding id="page3"></ion-content>
+      <ion-title>
+        Current Appointments
+      </ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only block on-click="goToMatching()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content id="page1">
+  
+
+    <ion-card>
+      <ion-item-sliding *ngFor="let message of messages" #item>
+        <ion-item>
+          <h1>{{ message.freetime}}</h1>
+          <h2>{{ message.date }}</h2>
+          <h3>{{ message.memo }}</h3>
+          <h4 style="color:red;">{{ message.nickname2 }}</h4>
+        </ion-item>
+  
+      </ion-item-sliding>
+    </ion-card>
+  
+  </ion-content>

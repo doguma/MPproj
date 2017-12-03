@@ -11,7 +11,77 @@
 
 <ion-content padding id="page5">
 
-  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <div padding>
+    <font color="grey">
+      You may set up your meeting here!
+      <br/>
+      <br/> Check on the available hours below using the searchbar.
+      <br/>Then choose the right time to hang out with your friends :)
+      <br/>
+      <br/> Keep in mind that the hour indicates the following 60 minutes from the selected time.
+      <br/> Ex. '9 am' means '9 am to 10 am.'
+    </font>
+  </div>
+
+  <ion-card>
+
+    <ion-item>
+      <ion-label> date </ion-label>
+      <ion-datetime type="date" max="2025" [(ngModel)]="date"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>hour</ion-label>
+      <ion-select [(ngModel)]="freetime" multiple="true">
+        <ion-option> 6 am</ion-option>
+        <ion-option> 7 am</ion-option>
+        <ion-option> 8 am</ion-option>
+        <ion-option> 9 am</ion-option>
+        <ion-option> 10 am</ion-option>
+        <ion-option> 11 am</ion-option>
+        <ion-option> 12 pm</ion-option>
+        <ion-option> 1 pm</ion-option>
+        <ion-option> 2 pm</ion-option>
+        <ion-option> 3 pm</ion-option>
+        <ion-option> 4 pm</ion-option>
+        <ion-option> 5 pm</ion-option>
+        <ion-option> 6 pm</ion-option>
+        <ion-option> 7 pm</ion-option>
+        <ion-option> 8 pm</ion-option>
+        <ion-option> 9 pm</ion-option>
+        <ion-option> 10 pm</ion-option>
+        <ion-option> 11 pm</ion-option>
+        <ion-option> 12 am</ion-option>
+        <ion-option> 1 am</ion-option>
+        <ion-option> 2 am</ion-option>
+        <ion-option> 3 am</ion-option>
+        <ion-option> 4 am</ion-option>
+        <ion-option> 5 am</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label> memo</ion-label>
+      <ion-input type="text" [(ngModel)]="memo"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label> who are you meeting? </ion-label>
+      <ion-input type="text" [(ngModel)]="nickname2"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label> Type your nickname </ion-label>
+        <ion-input type="text" [(ngModel)]="nickname"></ion-input>
+      </ion-item>
+
+    <div padding>
+      <button padding id="myHours-button2" ion-button color="light" block (click)="setMeeting()"> Set Meeting! </button>
+    </div>
+
+  </ion-card>
+  <br />
+  <ion-searchbar padding (ionInput)="getItems($event)" [placeholder]="nickname"></ion-searchbar>
   <ion-list>
 
     <ion-item-sliding *ngFor="let country of countryList">
